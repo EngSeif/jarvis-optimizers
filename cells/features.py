@@ -160,8 +160,8 @@ def compute_platelet_parameters(df, img_shape):
     print("="*50 + "\n")
 
 
-img = cv2.imread('../data/input/JPEGImages/BloodImage_00000.jpg')
-_, rbc_labels_all = label_RBC(img)
+img = cv2.imread('../data/input/JPEGImages/BloodImage_00002.jpg')
+rbc_image, rbc_labels_all = label_RBC(img)
 raw_rbc = regionprops(rbc_labels_all)
 raw_rbc_count = len(raw_rbc)
 print(f"{'Red Blood Cell Count':<25} | {raw_rbc_count}")
@@ -198,6 +198,6 @@ img_with_rbcs = visualize_filtered_rbcs(img, rbc_labels_all, df_rbc)
 final_combined_img = visualize_filtered_platelets(img_with_rbcs, platelet_labels_all, df_platelets)
 
 show_images(
-    [img, final_combined_img], 
-    ["Original Image", "Detected Cells (Green=RBC, Red=Platelet)"]
+    [img,rbc_image ,final_combined_img], 
+    ["Original Image","Before filtering" ,"Detected Cells (Green=RBC, Red=Platelet)"]
 )
